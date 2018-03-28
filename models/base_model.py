@@ -7,7 +7,7 @@ from datetime import datetime
 import models
 from sqlalchemy import Column, Integer, DateTime, String
 from sqlalchemy.ext.declarative import declarative_base
-
+from os import environ
 Base = declarative_base()
 
 
