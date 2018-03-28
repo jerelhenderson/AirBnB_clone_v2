@@ -2,14 +2,14 @@
 '''
     Define the class Place.
 '''
-from models.base_model import BaseModel
+from models.base_model import BaseModel, Base
 import models
 import os
 from sqlalchemy import Column, String, Integer, ForeignKey, DateTime, Float
 from sqlalchemy.orm import relationship
 
 
-class Place(BaseModel):
+class Place(BaseModel, Base):
     '''
         Define the class Place that inherits from BaseModel.
     '''
