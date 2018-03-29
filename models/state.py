@@ -3,8 +3,9 @@
     Implementation of the State class
 '''
 
-from models.base_model import BaseModel
+from models.base_model import BaseModel, Base
 from sqlalchemy import Column, String, ForeignKey, Integer, DateTime
+from sqlalchemy.orm import relationship
 from os import environ
 
 class State(BaseModel, Base):
@@ -19,15 +20,15 @@ class State(BaseModel, Base):
 
         @property
         def cities(self):
-        '''
-        getter for cities using FileStorage
-        '''
-        city_dict = models.storage.all(City)
+            '''
+            getter for cities using FileStorage
+            '''
+            city_dict = models.storage.all(City)
 
-        state_cities = []
-        for key, value in city_dict:
-            if value.state_id == self.id:
-                state_cities.append(value)
+            state_cities = []
+            for key, value in city_dict:
+                if value.state_id == self.id:
+                    state_cities.append(value)
             return state_cities
 
     name = ""

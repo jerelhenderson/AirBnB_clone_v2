@@ -4,6 +4,7 @@
 '''
 from models.base_model import BaseModel
 from sqlalchemy import Column, String, ForeignKey, Integer, DateTime
+from sqlalchemy.orm import relationship
 from os import environ
 
 class User(BaseModel):
@@ -12,15 +13,16 @@ class User(BaseModel):
     '''
     __tablename__ = "users"
 
-    if (environ.get('HBNB_TYPE_STORAGE' == 'db'):
-        email = Column(String(128), nullabe=False)
-        password = Column(String(128), nullabe=False)
-        first_name = Column(String(128), nullabe=False)
-        last_name = Column(String(128), nullabe=False)
+    email = Column(String(128), nullable=False)
+    password = Column(String(128), nullable=False)
+    first_name = Column(String(128), nullable=False)
+    last_name = Column(String(128), nullable=False)
+
+    if (environ.get('HBNB_TYPE_STORAGE') == 'db'):
         places = relationship("Place", backref="user", cascade="delete")
         reviews = relationship("Review", backref="user", cascade="delete")
-
-    email = ""
-    password = ""
-    first_name = ""
-    last_name = ""
+    else:
+        email = ""
+        password = ""
+        first_name = ""
+        last_name = ""

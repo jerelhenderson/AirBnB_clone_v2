@@ -2,13 +2,14 @@
 '''
     Define the class City.
 '''
-from models.base_model import BaseModel
+from models.base_model import BaseModel, Base
 from sqlalchemy import Column, String, ForeignKey, Integer, DateTime
+from sqlalchemy.orm import relationship
 from os import environ
 
 class City(BaseModel, Base):
     '''
-        Define the class City that inherits from BaseModel.
+    Define the class City that inherits from BaseModel.
     '''
     __tablename__ = "cities"
 

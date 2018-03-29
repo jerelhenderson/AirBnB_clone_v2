@@ -69,8 +69,8 @@ class BaseModel:
 
         return (cp_dct)
 
-    def delete(self)
-    '''
-    delete current instance from dictionary
-    '''
-    models.storage.delete(self)
+    def delete(self):
+        '''
+        delete current instance from dictionary
+        '''
+        models.storage.delete(self)
