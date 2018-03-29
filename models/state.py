@@ -4,9 +4,10 @@
 '''
 
 from models.base_model import BaseModel
+from sqlalchemy import Column, String, ForeignKey, Integer, DateTime
+from os import environ
 
-
-class State(BaseModel):
+class State(BaseModel, Base):
     '''
         Implementation for the State.
     '''

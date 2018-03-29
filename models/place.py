@@ -3,12 +3,15 @@
     Define the class Place.
 '''
 from models.base_model import BaseModel
-
+from sqlalchemy import Column, String, ForeignKey, Integer, DateTime
+from os import environ
 
 class Place(BaseModel):
     '''
         Define the class Place that inherits from BaseModel.
     '''
+    __tablename__ = "places"
+
     city_id = ""
     user_id = ""
     name = ""

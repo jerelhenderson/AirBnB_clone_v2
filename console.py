@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 '''
-    Implementing the console for the HBnB project.
+Implementing the console for the HBnB project.
 '''
 import cmd
 import json
@@ -18,60 +18,60 @@ from models.review import Review
 
 class HBNBCommand(cmd.Cmd):
     '''
-        Contains the entry point of the command interpreter.
+    Contains the entry point of the command interpreter.
     '''
 
     prompt = ("(hbnb) ")
 
     def do_quit(self, args):
         '''
-            Quit command to exit the program.
+        Quit command to exit the program.
         '''
         return True
 
     def do_EOF(self, args):
         '''
-            Exits after receiving the EOF signal.
+        Exits after receiving the EOF signal.
         '''
         return True
 
     def do_create(self, args):
         '''
-            Create a new instance of class BaseModel and saves it
-            to the JSON file.
+        Create a new instance of class BaseModel and saves it
+        to the JSON file.
         '''
+
+        dict = {}
+
+
         if len(args) == 0:
             print("** class name missing **")
             return
         try:
-            args = shlex.split(args)
-            new_instance = eval(args[0])()
-            for arg in args[1:]:
-                try:
-                    if '=' in args[arg]:
-                        k = arg.split('=')[0]
-                        v = arg.split('=')[1]
-                        if v[0] == '"':
-                            v = v[1:len(v) - 1]
-                            v = v.replace("_", " ")
-                        elif "." in v:
-                            v = float(v)
-                        else:
-                            v = int(v)
-                        setattr(new_instance, k, v)
-                except Exception:
-                    continue
+            dict = {}
 
-            new_instance.save()
+            args = args.split()
+            new_instance = eval(args[0])()
+
             print(new_instance.id)
 
+            for attrs in range(len(args)):
+                if "=" in args[attrs]:
+                    key, value = args[attrs].split('=')
+                    value = value.replace('_', ' ')
+                    if key in dict:
+                        value = dict[key]
+                        setattr(new_instance, key, value)
+                    setattr(new_instance, key, value)
         except:
             print("** class doesn't exist **")
 
+        new_instance.save()
+
     def do_show(self, args):
         '''
-            Print the string representation of an instance baed on
-            the class name and id given as args.
+        Print the string representation of an instance based on
+        the class name and id given as args.
         '''
         args = shlex.split(args)
         if len(args) == 0:
