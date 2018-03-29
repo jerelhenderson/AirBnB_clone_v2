@@ -8,14 +8,16 @@ from sqlalchemy import Column, String, ForeignKey, Integer, DateTime
 from sqlalchemy.orm import relationship
 from os import environ
 
+
 class State(BaseModel, Base):
     '''
         Implementation for the State.
     '''
     __tablename__ = "states"
 
+    name = Column(String(128), nullable=False)
+
     if (environ.get('HBNB_TYPE_STORAGE') == 'db'):
-        name = Column(String(128), nullable=False)
         cities = relationship("City", backref="state", cascade="delete")
 
         @property
@@ -30,5 +32,5 @@ class State(BaseModel, Base):
                 if value.state_id == self.id:
                     state_cities.append(value)
             return state_cities
-
-    name = ""
+    else:
+        name = ""

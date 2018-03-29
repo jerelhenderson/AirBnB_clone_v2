@@ -52,4 +52,8 @@ from the root directory.
 
 ## Bugs
 
-+ No known bugs at this time.
++ Crawling with 'em
+
+AUTHORS
+Daniel Ojeda 211@holbertonschool.com
+Jerel Henderson 259@holbertonschool.com

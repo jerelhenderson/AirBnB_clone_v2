@@ -42,7 +42,6 @@ class HBNBCommand(cmd.Cmd):
 
         dict = {}
 
-
         if len(args) == 0:
             print("** class name missing **")
             return
