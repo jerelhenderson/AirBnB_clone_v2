@@ -45,8 +45,8 @@ def do_deploy(archive_path):
     except:
         return False
 
-def deplay():
-    """ returns value of do_deplay """
+def deploy():
+    """ returns value of do_deploy """
     archive = do_pack()
     if archive is True:
         return do_deplay(archive)
