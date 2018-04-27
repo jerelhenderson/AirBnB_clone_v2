@@ -51,13 +51,12 @@ class HBNBCommand(cmd.Cmd):
                         k = arg.split('=')[0]
                         v = arg.split('=')[1]
                         v = v.replace("_", " ")
-                        try:
-                            float(v[1])
-                            v[1] = float(v[1])
-                        except:
-                            pass
                         if v.isdigit():
-                            v[1] = int(v[1])
+                            v = int(v)
+                        if float(v):
+                            v = float(v)
+                        else:
+                            pass
                     setattr(new_instance, k, v)
                 except Exception:
                     continue
