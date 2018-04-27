@@ -45,24 +45,25 @@ class HBNBCommand(cmd.Cmd):
         try:
             args = shlex.split(args)
             new_instance = eval(args[0])()
-            for arg in args[1:]:
+            for arg in args[:]:
                 try:
-                    if '=' in args[arg]:
+                    if '=' in arg:
                         k = arg.split('=')[0]
                         v = arg.split('=')[1]
-                        if v[0] == '"':
-                            v = v[1:len(v) - 1]
-                            v = v.replace("_", " ")
-                        elif "." in v:
-                            v = float(v)
-                        else:
-                            v = int(v)
-                        setattr(new_instance, k, v)
+                        v = v.replace("_", " ")
+                        try:
+                            float(v[1])
+                            v[1] = float(v[1])
+                        except:
+                            pass
+                        if v.isdigit():
+                            v[1] = int(v[1])
+                    setattr(new_instance, k, v)
                 except Exception:
                     continue
 
-            new_instance.save()
-            print(new_instance.id)
+                new_instance.save()
+                print(new_instance.id)
 
         except:
             print("** class doesn't exist **")
