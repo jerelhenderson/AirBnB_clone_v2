@@ -53,10 +53,13 @@ class HBNBCommand(cmd.Cmd):
                         v = v.replace("_", " ")
                         if v.isdigit():
                             v = int(v)
-                        if float(v):
-                            v = float(v)
                         else:
-                            pass
+                            try:
+                                float(v)
+                                v = float(v)
+                            except:
+                                pass
+
                     setattr(new_instance, k, v)
                 except Exception:
                     continue
