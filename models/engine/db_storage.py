@@ -12,6 +12,7 @@ from models.state import State
 from models.user import User
 from models.place import Place
 from models.review import Review
+from models.amenity import Amenity
 
 class_list = [City, State, User, Place, Review]
 
@@ -42,7 +43,7 @@ class DBStorage():
         current database session query
         """
         new_dict = {}
-        
+
         if not cls:
             for a_class in class_list:
                 for obj in self.__session.query(a_class):

@@ -13,8 +13,8 @@ from models.user import User
 from models.place import Place
 from models.state import State
 from models.city import City
-from models.amenity import Amenity
 from models.review import Review
+from models.amenity import Amenity
 
 
 class HBNBCommand(cmd.Cmd):
@@ -70,7 +70,6 @@ class HBNBCommand(cmd.Cmd):
             print(new_instance.id)
 
         except:
-            print("This class doesn't exist")
             print("** class doesn't exist **")
 
     def do_show(self, args):
