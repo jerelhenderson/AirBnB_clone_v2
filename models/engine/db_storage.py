@@ -2,12 +2,18 @@
 """
 Storage module
 """
-
 from os import getenv
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 from models.base_model import Base
 import models
+from models.city import City
+from models.state import State
+from models.user import User
+from models.place import Place
+from models.review import Review
+
+class_list = [City, State, User, Place, Review]
 
 
 class DBStorage():
@@ -36,21 +42,20 @@ class DBStorage():
         current database session query
         """
         new_dict = {}
+        
         if not cls:
-            for key, value in models.classes.items():
-                query = self.__session.query(value)
-                for objs in query:
-                    k = str(obj.__class__.__name__) + '.' + str(obj.id)
-                    new_dict[k] = objs
+            for a_class in class_list:
+                for obj in self.__session.query(a_class):
+                    k = obj.__class__.__name__, obj.id
+                    new_dict[k] = obj
         else:
             if type(cls) is str:
                 cls = models.classes[cls]
-            query = self.__session.query(cls)
-            for objs in query:
-                k = str(obj.__class__.__name__) + '.' + str(obj.id)
-                new_dict[k] = objs
-
-        return new_dict
+            query = self.__session.query(a_class)
+            for obj in query:
+                k = obj.__class__.__name__, obj.id
+                new_dict[k] = obj
+            return new_dict
 
     def new(self, obj):
         """
