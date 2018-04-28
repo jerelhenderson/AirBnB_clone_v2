@@ -17,15 +17,18 @@ class State(BaseModel, Base):
     '''
     __tablename__ = 'states'
     name = Column(String(128), nullable=False)
+
     if environ.get("HBNB_TYPE_STORAGE") == "db":
         cities = relationship("City", backref="state", cascade="delete")
-
     else:
+        name = ""
+
         @property
         def cities(self):
-            mydict = models.storage.all(models.classes["City"])
-            cityl = []
-            for key, value in mydict.items():
+            city_dict = models.storage.all(models.classes["City"])
+            city_list = []
+
+            for key, value in city_dict.items():
                 if value.state_id == self.id:
-                    cityl.append(value)
-            return cityl
+                    city_list.append(value)
+            return city_list
