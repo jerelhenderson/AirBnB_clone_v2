@@ -18,5 +18,5 @@ classes = {"User": User, "BaseModel": BaseModel,
            "City": City, "Amenity": Amenity,
            "Review": Review}
 
-    storage = FileStorage()
-    storage.reload()
+storage = FileStorage()
+storage.reload()
