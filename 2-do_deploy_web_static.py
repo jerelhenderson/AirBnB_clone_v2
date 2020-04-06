@@ -32,18 +32,20 @@ def do_deploy(archive_path):
     else:
         return False
 
+    pathname = "/data/web_static"
     filename = os.path.basename(archive_path)
     name = os.path.splitext(filename)
 
     try:
-        put(archive_path, "/tmp"))
+        put(archive_path, "/tmp")
         run("mkdir -p /data/web_static/releases/{}".format(name))
-        run("tar -xzf /tmp/{} -C /data/web_static/releases/{}".format(filename, name))
+        run("tar -xzf /tmp/{} -C /data/web_static/releases/{}".format(
+            filename, name))
         run("rm /tmp/{}".format(filename))
         run("mv /data/web/static/releases/{}".format(name))
         run("rm -rf /data/web_static/relases/{}/web_static".format(name))
         run("rm -rf /data/web_static/current")
-        run("ln -s /data/web_static/releases{} /data/web_static/current".format(name))
+        run("ln -s {}/releases/{} {}/current".format(pathname, name))
         return True
     except:
         return False

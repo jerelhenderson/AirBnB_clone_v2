@@ -1,7 +1,9 @@
 #!/usr/bin/python3
+
 """
 Fabric script generates .tgz archive from contents of web_static directory
 """
+
 from fabric.api import local
 from datetime import datetime
 
@@ -32,23 +34,29 @@ def do_deploy(archive_path):
     else:
         return False
 
+    pathname = "/data/web_static"
+    filename = os.path.basename(archive_path)
+    name = os.path.splitext(filename)
+
     try:
-        put(archive_path, "/tmp"))
-        run("mkdir -p /data/web_static/releases/{}".format())
-        run("tar -xzf /tmp/{} -C /data/web_static/releases/{}".format())
-        run("rm /tmp/{}".format())
-        run("mv /data/web/static/releases/{}".format())
-        run("rm -rf /data/web_static/relases/{}".format())
+        put(archive_path, "/tmp")
+        run("mkdir -p /data/web_static/releases/{}".format(name))
+        run("tar -xzf /tmp/{} -C /data/web_static/releases/{}".format(
+            filename, name))
+        run("rm /tmp/{}".format(filename))
+        run("mv /data/web/static/releases/{}".format(name))
+        run("rm -rf /data/web_static/relases/{}/web_static".format(name))
         run("rm -rf /data/web_static/current")
-        run("ln -s /data/web_static/releases{}".format())
+        run("ln -s {}/releases/{} {}/current".format(pathname, name))
         return True
     except:
         return False
+
 
 def deploy():
     """ returns value of do_deploy """
     archive = do_pack()
     if archive is True:
-        return do_deplay(archive)
+        return do_deploy(archive)
     else:
         return False
