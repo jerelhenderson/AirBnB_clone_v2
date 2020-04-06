@@ -2,8 +2,9 @@
 """
 Fabric script generates .tgz archive from contents of web_static directory
 """
-from fabric.api import local
+from fabric.api import local, env, run, put
 from datetime import datetime
+import os
 
 
 env.hosts = ['54.152.200.18', '54.224.57.104']
@@ -20,8 +21,6 @@ def do_pack():
         return ("versions/web_static_{}.tgz".format(cur_time))
     except:
         return None
-
-import os
 
 
 def do_deploy(archive_path):
