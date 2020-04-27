@@ -55,7 +55,7 @@ class DBStorage():
             for obj in query:
                 k = obj.__class__.__name__, obj.id
                 new_dict[k] = obj
-            return new_dict
+        return new_dict
 
     def new(self, obj):
         """
