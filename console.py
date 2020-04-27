@@ -5,7 +5,9 @@
 import cmd
 import json
 import shlex
+import os
 from models.engine.file_storage import FileStorage
+from models.engine.db_storage import DBStorage
 from models.base_model import BaseModel
 from models.user import User
 from models.place import Place
@@ -68,6 +70,7 @@ class HBNBCommand(cmd.Cmd):
             print(new_instance.id)
 
         except:
+            print("This class doesn't exist")
             print("** class doesn't exist **")
 
     def do_show(self, args):
@@ -132,7 +135,10 @@ class HBNBCommand(cmd.Cmd):
             based or not on the class name.
         '''
         obj_list = []
-        storage = FileStorage()
+        if os.getenv('HBNB_TYPE_STORAGE') == "db":
+            storage = DBStorage()
+        else:
+            storage = FileStorage()
         storage.reload()
         objects = storage.all()
         try:
