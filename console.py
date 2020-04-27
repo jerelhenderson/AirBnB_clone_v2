@@ -62,8 +62,8 @@ class HBNBCommand(cmd.Cmd):
                 except Exception:
                     continue
 
-                new_instance.save()
-                print(new_instance.id)
+            new_instance.save()
+            print(new_instance.id)
 
         except:
             print("** class doesn't exist **")
