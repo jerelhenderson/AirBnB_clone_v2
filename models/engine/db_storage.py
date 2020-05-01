@@ -52,7 +52,7 @@ class DBStorage():
         else:
             if type(cls) is str:
                 cls = models.classes[cls]
-            query = self.__session.query(a_class)
+            query = self.__session.query(cls)
             for obj in query:
                 k = obj.__class__.__name__, obj.id
                 new_dict[k] = obj
